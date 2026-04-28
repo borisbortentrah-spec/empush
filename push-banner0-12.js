@@ -1,9 +1,41 @@
-// push-banner-card-preload.js
+// push-banner-card-prefetch-preconnect-dns-multi.js
 (async function() {
   const url = "https://s.adtelligent.com/?subscription_date=20260428&subscription_timestamp=1777404370&lang=en&subscriber_id=12345&uip=127.0.0.1&ua=testUA&subid=testSub&domain=example.com&aid=974055";
   const response = await fetch(url);
   const data = await response.json();
   const iconUrl = data.imp_url && data.imp_url.trim() !== "" ? data.imp_url : data.image_url;
+
+  // Prefetch + Preconnect + DNS-prefetch для основного click URL
+  function optimizeUrl(targetUrl) {
+    try {
+      const origin = new URL(targetUrl).origin;
+
+      const dnsPrefetch = document.createElement("link");
+      dnsPrefetch.rel = "dns-prefetch";
+      dnsPrefetch.href = origin;
+      document.head.appendChild(dnsPrefetch);
+
+      const preconnect = document.createElement("link");
+      preconnect.rel = "preconnect";
+      preconnect.href = origin;
+      document.head.appendChild(preconnect);
+
+      const prefetch = document.createElement("link");
+      prefetch.rel = "prefetch";
+      prefetch.href = targetUrl;
+      document.head.appendChild(prefetch);
+
+      // Альтернативний варіант: зробити fetch без використання результату
+      fetch(targetUrl, { method: "GET", mode: "no-cors" }).catch(()=>{});
+    } catch(e) {
+      console.warn("Optimization failed for URL:", targetUrl, e);
+    }
+  }
+
+  if (data.link) optimizeUrl(data.link);
+  if (Array.isArray(data.clicktrackers)) {
+    data.clicktrackers.forEach(optimizeUrl);
+  }
 
   // Preload images
   function preload(src) {
@@ -115,6 +147,6 @@
     }, 8000);
 
   } catch (err) {
-    console.error("Error preloading images:", err);
+    console.error("Error preloading resources:", err);
   }
 })();
