@@ -31,43 +31,45 @@
   }
 
   function getBannerLayout(version, data, iconUrl) {
-    const gradients = {
-      8: "linear-gradient(90deg, red, yellow)",
-      7: "linear-gradient(90deg, green, turquoise)",
-      6: "linear-gradient(90deg, orange, pink)",
-      5: "linear-gradient(90deg, blue, purple)",
-      4: "linear-gradient(90deg, purple, red)"
-    };
-    const timerBar = `<div class="timer-bar" style="background:${gradients[version]}"></div>`;
     switch(version) {
       case 8:
-        return `${timerBar}
-          <div class="header"><div class="icon"><img src="${iconUrl}"></div>
-          <div><h3>${data.title}</h3><p>${data.description}</p></div></div>
+        return `
+          <div class="header">
+            <div class="icon"><img src="${iconUrl}"></div>
+            <div><h3>${data.title}</h3><p>${data.description}</p></div>
+          </div>
           <div class="hero"><img src="${data.image_url}"></div>`;
       case 7:
-        return `${timerBar}
+        return `
           <div class="hero"><img src="${data.image_url}"></div>
           <h3>${data.title}</h3><p>${data.description}</p>
-          <div class="bottom"><div class="icon"><img src="${iconUrl}"></div>
-          <a href="${data.link}" target="_blank" class="cta">Learn more</a></div>`;
+          <div class="bottom">
+            <div class="icon"><img src="${iconUrl}"></div>
+            <a href="${data.link}" target="_blank" class="cta">Learn more</a>
+          </div>`;
       case 6:
-        return `${timerBar}
+        return `
           <img src="${data.image_url}" class="main">
           <h3>${data.title}</h3><p>${data.description}</p>
-          <div class="bottom"><div class="icon"><img src="${iconUrl}"></div>
-          <span>Sponsored content</span></div>`;
+          <div class="bottom">
+            <div class="icon"><img src="${iconUrl}"></div>
+            <span>Sponsored content</span>
+          </div>`;
       case 5:
-        return `${timerBar}
+        return `
+          <div class="timer-bar"><div class="icon"><img src="${iconUrl}"></div></div>
           <img src="${data.image_url}" class="main">
           <h3>${data.title}</h3><p>${data.description}</p>`;
       case 4:
-        return `${timerBar}
-          <div class="close-arrow">×</div>
+        return `
+          <div class="top-bar">
+            <div class="icon"><img src="${iconUrl}"></div>
+            <div class="close-arrow">×</div>
+          </div>
           <img src="${data.image_url}" class="main">
           <h3>${data.title}</h3><p>${data.description}</p>`;
       default:
-        return `${timerBar}<h3>${data.title}</h3><p>${data.description}</p>`;
+        return `<h3>${data.title}</h3><p>${data.description}</p>`;
     }
   }
 
@@ -101,8 +103,10 @@
     .hero img, .main { width:100%; height:auto; display:block; margin-bottom:6px; }
     .icon img { width:32px; height:32px; border-radius:4px; }
     .cta { background:#0073e6; color:#fff; padding:4px 8px; border-radius:4px; text-decoration:none; }
-    .timer-bar { height:3px; animation: timerLine 5s linear forwards; }
-    @keyframes timerLine { from { width:100%; } to { width:0%; } }
+    .timer-bar { height:3px; background:linear-gradient(90deg, blue, purple); display:flex; align-items:center; }
+    .timer-bar .icon img { width:20px; height:20px; margin-left:4px; }
+    .top-bar { display:flex; justify-content:space-between; align-items:center; }
+    .close-arrow { cursor:pointer; background:#333; color:#fff; border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; }
   `;
   document.head.appendChild(style);
 
