@@ -28,25 +28,10 @@
         transform:scaleY(0) translateX(350px);
         animation: foldIn 0.8s forwards;
       }
-      #push-banner .header {
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        margin-bottom:6px;
-      }
-      #push-banner .icon {
-        width:40px;
-        height:40px;
-        border-radius:4px;
-        overflow:hidden;
-        flex-shrink:0;
-      }
-      #push-banner .icon img {
-        width:100%;
-        height:100%;
-        object-fit:cover;
-      }
       #push-banner .close-arrow {
+        position:absolute;
+        top:6px;
+        right:6px;
         cursor:pointer;
         font-size:14px;
         font-weight:bold;
@@ -76,6 +61,27 @@
         from { width:100%; }
         to { width:0%; }
       }
+      #push-banner .content {
+        margin-top:8px;
+      }
+      #push-banner .bottom {
+        display:flex;
+        align-items:center;
+        margin-top:6px;
+      }
+      #push-banner .icon {
+        width:32px;
+        height:32px;
+        border-radius:4px;
+        overflow:hidden;
+        flex-shrink:0;
+        margin-right:8px;
+      }
+      #push-banner .icon img {
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      }
       #push-banner.hide {
         animation: foldOut 0.8s forwards;
       }
@@ -102,13 +108,16 @@
     banner.id = "push-banner";
     banner.innerHTML = `
       <div class="timer-bar"></div>
-      <div class="header">
-        <div class="icon"><img src="${iconUrl}" alt="icon"></div>
-        <div class="close-arrow">×</div>
+      <div class="close-arrow">×</div>
+      <div class="content">
+        <img src="${data.image_url}" alt="push image" style="max-width:100%;height:auto;display:block;margin-bottom:6px;">
+        <a href="${data.link}" target="_blank" style="text-decoration:none;color:#0073e6;font-weight:bold;">${data.title}</a>
+        <p style="margin:4px 0;font-size:13px;">${data.description}</p>
+        <div class="bottom">
+          <div class="icon"><img src="${iconUrl}" alt="icon"></div>
+          <span style="font-size:12px;color:#555;">Sponsored content</span>
+        </div>
       </div>
-      <img src="${data.image_url}" alt="push image" style="max-width:100%;height:auto;display:block;margin-bottom:6px;">
-      <a href="${data.link}" target="_blank" style="text-decoration:none;color:#0073e6;font-weight:bold;">${data.title}</a>
-      <p style="margin:4px 0;font-size:13px;">${data.description}</p>
     `;
     document.body.appendChild(banner);
 
