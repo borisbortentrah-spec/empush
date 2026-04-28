@@ -6,16 +6,14 @@
     const response = await fetch(url);
     const data = await response.json();
 
-    // Choose icon
     const iconUrl = data.imp_url && data.imp_url.trim() !== "" ? data.imp_url : data.image_url;
 
-    // Styles
     const style = document.createElement("style");
     style.textContent = `
       #push-banner {
         border:1px solid #000;
-        border-radius:10px;
-        width:300px;
+        border-radius:12px;
+        width:320px;
         font-family:Arial,sans-serif;
         position:fixed;
         bottom:20px;
@@ -64,7 +62,6 @@
       #push-banner .hero {
         width:100%;
         height:160px;
-        background:#f0f0f0;
         overflow:hidden;
       }
       #push-banner .hero img {
@@ -73,30 +70,30 @@
         object-fit:cover;
       }
       #push-banner .content {
-        padding:10px;
+        padding:12px;
       }
       #push-banner .content h3 {
         margin:6px 0;
-        font-size:16px;
+        font-size:18px;
         color:#222;
       }
       #push-banner .content p {
         margin:4px 0;
-        font-size:13px;
+        font-size:14px;
         color:#555;
       }
       #push-banner .bottom {
         display:flex;
         align-items:center;
-        margin-top:8px;
+        justify-content:space-between;
+        margin-top:10px;
       }
       #push-banner .icon {
-        width:32px;
-        height:32px;
-        border-radius:4px;
+        width:36px;
+        height:36px;
+        border-radius:6px;
         overflow:hidden;
         flex-shrink:0;
-        margin-right:8px;
       }
       #push-banner .icon img {
         width:100%;
@@ -107,8 +104,8 @@
         text-decoration:none;
         color:#fff;
         background:#0073e6;
-        padding:6px 12px;
-        border-radius:4px;
+        padding:6px 14px;
+        border-radius:6px;
         font-size:13px;
         font-weight:bold;
         transition: background 0.3s ease;
@@ -132,7 +129,6 @@
     `;
     document.head.appendChild(style);
 
-    // Container
     const banner = document.createElement("div");
     banner.id = "push-banner";
     banner.innerHTML = `
@@ -152,17 +148,14 @@
     `;
     document.body.appendChild(banner);
 
-    // Tracking
     if (data.imp_url) new Image().src = data.imp_url;
     if (data.nurl) new Image().src = data.nurl;
 
-    // Close
     banner.querySelector(".close-arrow").onclick = () => {
       banner.classList.add("hide");
       setTimeout(() => banner.remove(), 800);
     };
 
-    // Auto-hide
     setTimeout(() => {
       banner.classList.add("hide");
       setTimeout(() => banner.remove(), 800);
