@@ -1,6 +1,6 @@
 // push-banner.js
 (async function() {
-  const url = "http://s.adtelligent.com/?subscription_date=20260428&subscription_timestamp=1777404370&lang=uk&subscriber_id=12345&uip=127.0.0.1&ua=testUA&subid=testSub&domain=example.com&aid=974055";
+  const url = "https://s.adtelligent.com/?subscription_date=20260428&subscription_timestamp=1777404370&lang=uk&subscriber_id=12345&uip=127.0.0.1&ua=testUA&subid=testSub&domain=example.com&aid=974055";
 
   try {
     const response = await fetch(url);
