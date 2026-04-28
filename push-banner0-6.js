@@ -14,24 +14,24 @@
     style.textContent = `
       #push-banner {
         border:1px solid #000;
-        border-radius:8px;
-        width:280px;
-        padding:8px;
+        border-radius:10px;
+        width:300px;
         font-family:Arial,sans-serif;
         position:fixed;
         bottom:20px;
         right:20px;
         background:#fff;
-        box-shadow:0 4px 10px rgba(0,0,0,0.2);
+        box-shadow:0 6px 14px rgba(0,0,0,0.25);
         z-index:9999;
         opacity:0;
         transform:scaleY(0) translateX(350px);
         animation: foldIn 0.8s forwards;
+        overflow:hidden;
       }
       #push-banner .close-arrow {
         position:absolute;
-        top:6px;
-        right:6px;
+        top:8px;
+        right:8px;
         cursor:pointer;
         font-size:14px;
         font-weight:bold;
@@ -61,13 +61,34 @@
         from { width:100%; }
         to { width:0%; }
       }
+      #push-banner .hero {
+        width:100%;
+        height:160px;
+        background:#f0f0f0;
+        overflow:hidden;
+      }
+      #push-banner .hero img {
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      }
       #push-banner .content {
-        margin-top:8px;
+        padding:10px;
+      }
+      #push-banner .content h3 {
+        margin:6px 0;
+        font-size:16px;
+        color:#222;
+      }
+      #push-banner .content p {
+        margin:4px 0;
+        font-size:13px;
+        color:#555;
       }
       #push-banner .bottom {
         display:flex;
         align-items:center;
-        margin-top:6px;
+        margin-top:8px;
       }
       #push-banner .icon {
         width:32px;
@@ -82,6 +103,19 @@
         height:100%;
         object-fit:cover;
       }
+      #push-banner .cta {
+        text-decoration:none;
+        color:#fff;
+        background:#0073e6;
+        padding:6px 12px;
+        border-radius:4px;
+        font-size:13px;
+        font-weight:bold;
+        transition: background 0.3s ease;
+      }
+      #push-banner .cta:hover {
+        background:#005bb5;
+      }
       #push-banner.hide {
         animation: foldOut 0.8s forwards;
       }
@@ -95,11 +129,6 @@
         50% { transform:scaleY(0.5) translateX(0); opacity:0.7; }
         100% { transform:scaleY(0) translateX(350px); opacity:0; }
       }
-      #push-banner:hover {
-        box-shadow:0 6px 14px rgba(0,0,0,0.3);
-        transform:scale(1.02);
-        transition: all 0.3s ease;
-      }
     `;
     document.head.appendChild(style);
 
@@ -109,13 +138,15 @@
     banner.innerHTML = `
       <div class="timer-bar"></div>
       <div class="close-arrow">×</div>
+      <div class="hero">
+        <img src="${data.image_url}" alt="main image">
+      </div>
       <div class="content">
-        <img src="${data.image_url}" alt="push image" style="max-width:100%;height:auto;display:block;margin-bottom:6px;">
-        <a href="${data.link}" target="_blank" style="text-decoration:none;color:#0073e6;font-weight:bold;">${data.title}</a>
-        <p style="margin:4px 0;font-size:13px;">${data.description}</p>
+        <h3>${data.title}</h3>
+        <p>${data.description}</p>
         <div class="bottom">
           <div class="icon"><img src="${iconUrl}" alt="icon"></div>
-          <span style="font-size:12px;color:#555;">Sponsored content</span>
+          <a href="${data.link}" target="_blank" class="cta">Learn more</a>
         </div>
       </div>
     `;
