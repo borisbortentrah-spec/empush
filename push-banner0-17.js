@@ -1,6 +1,20 @@
-// push-banner0-12.js
+// push-banner.js
 (async function() {
-  const params = new URLSearchParams(window.location.search);
+  // Parameter handling
+  let params;
+  const pageParams = new URLSearchParams(window.location.search);
+  const debugMode = pageParams.get("debug") === "1";
+
+  if (debugMode) {
+    // Debugging mode: use page URL parameters
+    params = pageParams;
+  } else {
+    // Standard setup: use script tag parameters
+    const currentScript = document.currentScript;
+    params = new URLSearchParams(currentScript.src.split("?")[1] || "");
+  }
+
+  // Read parameters
   const lang = params.get("lang") || "en";
   const uip = params.get("uip") || "127.0.0.1";
   const ua = params.get("ua") || navigator.userAgent;
