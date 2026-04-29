@@ -105,52 +105,61 @@
     }
   }
 
-  // CSS
-  const style = document.createElement("style");
-  style.textContent = `
-    #push-banner {
-      position:fixed;
-      width:320px;
-      background:#fff;
-      border-radius:12px;
-      box-shadow:0 6px 14px rgba(0,0,0,0.25);
-      font-family:Arial,sans-serif;
-      overflow:hidden;
-      z-index:9999;
-      opacity:0;
-      transform:translateY(50px);
-      animation: slideIn 0.6s forwards;
-      cursor:pointer;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-    #push-banner:hover {
-      box-shadow:0 10px 20px rgba(0,0,0,0.35);
-      transform:scale(1.03);
-    }
-    @keyframes slideIn {
-      from { opacity:0; transform:translateY(50px); }
-      to { opacity:1; transform:translateY(0); }
-    }
-    #push-banner.hide { animation: slideOut 0.6s forwards; }
-    @keyframes slideOut {
-      from { opacity:1; transform:translateY(0); }
-      to { opacity:0; transform:translateY(50px); }
-    }
-    #push-banner .timer-bar {
-      height:3px;
-      background:linear-gradient(90deg, #0073e6, #00c6ff);
-      animation: timerLine ${tts}s linear forwards;
-    }
-    @keyframes timerLine { from { width:100%; } to { width:0%; } }
-    #push-banner .top { display:flex; align-items:center; padding:10px; }
-    #push-banner .icon { width:40px; height:40px; border-radius:6px; overflow:hidden; margin-right:10px; flex-shrink:0; }
-    #push-banner .icon img { width:100%; height:100%; object-fit:cover; }
-    #push-banner .text h3 { margin:0; font-size:16px; color:#222; }
-    #push-banner .text p { margin:4px 0 0; font-size:13px; color:#555; }
-    #push-banner .hero img { width:100%; height:auto; display:block; }
-    #push-banner .cta {
-      display:block; margin:10px auto; text-align:center; width:90%;
-      background:#0073e6; color:#fff; padding:8px; border-radius:6px;
-      font-weight:bold; text-decoration:none; transition:background 0.3s ease;
-    }
-    #push
+// CSS
+const style = document.createElement("style");
+style.textContent = `
+  #push-banner {
+    position:fixed;
+    width:320px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 6px 14px rgba(0,0,0,0.25);
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+    z-index:9999;
+    opacity:0;
+    transform:translateY(50px);
+    animation: slideIn 0.6s forwards;
+    cursor:pointer;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  #push-banner:hover {
+    box-shadow:0 10px 20px rgba(0,0,0,0.35);
+    transform:scale(1.03);
+  }
+  @keyframes slideIn {
+    from { opacity:0; transform:translateY(50px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  #push-banner.hide { animation: slideOut 0.6s forwards; }
+  @keyframes slideOut {
+    from { opacity:1; transform:translateY(0); }
+    to { opacity:0; transform:translateY(50px); }
+  }
+  #push-banner .timer-bar {
+    height:3px;
+    background:linear-gradient(90deg, #0073e6, #00c6ff);
+    animation: timerLine ${tts}s linear forwards;
+  }
+  @keyframes timerLine { from { width:100%; } to { width:0%; } }
+  #push-banner .top { display:flex; align-items:center; padding:10px; }
+  #push-banner .icon { width:40px; height:40px; border-radius:6px; overflow:hidden; margin-right:10px; flex-shrink:0; }
+  #push-banner .icon img { width:100%; height:100%; object-fit:cover; }
+  #push-banner .text h3 { margin:0; font-size:16px; color:#222; }
+  #push-banner .text p { margin:4px 0 0; font-size:13px; color:#555; }
+  #push-banner .hero img { width:100%; height:auto; display:block; }
+  #push-banner .cta {
+    display:block; margin:10px auto; text-align:center; width:90%;
+    background:#0073e6; color:#fff; padding:8px; border-radius:6px;
+    font-weight:bold; text-decoration:none; transition:background 0.3s ease;
+  }
+  #push-banner .cta:hover { background:#005bb5; }
+  #push-banner .close-arrow {
+    position:absolute; top:8px; right:8px;
+    cursor:pointer; background:#333; color:#fff;
+    border-radius:50%; width:22px; height:22px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; line-height:1;
+  }
+`;
+document.head.appendChild(style);
